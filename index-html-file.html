@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>童趣玩具店 - 简约设计，快乐童年</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica', 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* 导航栏 */
+        nav {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ff6b6b;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #ff6b6b;
+        }
+        
+        /* 英雄区 */
+        .hero {
+            background-color: #ffeaa7;
+            padding: 5rem 1rem;
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #ff6b6b;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #555;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #ff6b6b;
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #ff5252;
+        }
+        
+        /* 分类部分 */
+        .categories {
+            padding: 4rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #333;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background-color: #ff6b6b;
+        }
+        
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .category-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .category-img {
+            height: 200px;
+            background-color: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .category-content {
+            padding: 1.5rem;
+        }
+        
+        .category-content h3 {
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+        
+        /* 热销商品 */
+        .featured-products {
+            background-color: #f0f0f0;
+            padding: 4rem 1rem;
+        }
+        
+        .featured-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .product-img {
+            height: 200px;
+            background-color: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .product-content {
+            padding: 1.5rem;
+        }
+        
+        .product-price {
+            color: #ff6b6b;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin: 0.5rem 0;
+        }
+        
+        .add-to-cart {
+            display: block;
+            width: 100%;
+            padding: 0.8rem;
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .add-to-cart:hover {
+            background-color: #ff5252;
+        }
+        
+        /* 订阅区域 */
+        .subscribe {
+            padding: 4rem 1rem;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .subscribe p {
+            margin-bottom: 2rem;
+            color: #555;
+        }
+        
+        .email-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .email-input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 5px 0 0 5px;
+            font-size: 1rem;
+        }
+        
+        .submit-btn {
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 0 1.5rem;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        /* 页脚 */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 3rem 1rem;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .footer-section h3::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background-color: #ff6b6b;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-section a:hover {
+            color: #ff6b6b;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid #444;
+            color: #aaa;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+            }
+            
+            .nav-links li {
+                margin: 0 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .email-form {
+                flex-direction: column;
+            }
+            
+            .email-input, .submit-btn {
+                width: 100%;
+                border-radius: 5px;
+                margin-bottom: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">童趣玩具店</div>
+            <ul class="nav-links">
+                <li><a href="#">首页</a></li>
+                <li><a href="#">玩具分类</a></li>
+                <li><a href="#">热销商品</a></li>
+                <li><a href="#">关于我们</a></li>
+                <li><a href="#">联系我们</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- 英雄区 -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>为孩子的成长选择优质玩具</h1>
+            <p>我们精选全球安全、环保、高品质的儿童玩具，让每个孩子都能拥有快乐的童年。</p>
+            <a href="#" class="btn">立即选购</a>
+        </div>
+    </section>
+    
+    <!-- 分类部分 -->
+    <section class="categories">
+        <h2 class="section-title">玩具分类</h2>
+        <div class="category-grid">
+            <div class="category-card">
+                <div class="category-img">
+                    <img src="/api/placeholder/400/320" alt="益智玩具" />
+                </div>
+                <div class="category-content">
+                    <h3>益智玩具</h3>
+                    <p>锻炼思维，培养智力</p>
+                </div>
+            </div>
+            
+            <div class="category-card">
+                <div class="category-img">
+                    <img src="/api/placeholder/400/320" alt="创意积木" />
+                </div>
+                <div class="category-content">
+                    <h3>创意积木</h3>
+                    <p>激发创造力，训练动手能力</p>
+                </div>
+            </div>
+            
+            <div class="category-card">
+                <div class="category-img">
+                    <img src="/api/placeholder/400/320" alt="毛绒玩具" />
+                </div>
+                <div class="category-content">
+                    <h3>毛绒玩具</h3>
+                    <p>柔软舒适，陪伴成长</p>
+                </div>
+            </div>
+            
+            <div class="category-card">
+                <div class="category-img">
+                    <img src="/api/placeholder/400/320" alt="户外玩具" />
+                </div>
+                <div class="category-content">
+                    <h3>户外玩具</h3>
+                    <p>健康活动，快乐运动</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 热销商品 -->
+    <section class="featured-products">
+        <div class="featured-container">
+            <h2 class="section-title">热销商品</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="/api/placeholder/400/320" alt="磁力积木套装" />
+                    </div>
+                    <div class="product-content">
+                        <h3>磁力积木套装</h3>
+                        <p>108件磁力积木，丰富形状，激发想象</p>
+                        <div class="product-price">¥299</div>
+                        <button class="add-to-cart">加入购物车</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="/api/placeholder/400/320" alt="儿童电子琴" />
+                    </div>
+                    <div class="product-content">
+                        <h3>儿童电子琴</h3>
+                        <p>多种音效，启蒙音乐才能</p>
+                        <div class="product-price">¥199</div>
+                        <button class="add-to-cart">加入购物车</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="/api/placeholder/400/320" alt="恐龙模型套装" />
+                    </div>
+                    <div class="product-content">
+                        <h3>恐龙模型套装</h3>
+                        <p>12种恐龙，逼真细节，科普知识</p>
+                        <div class="product-price">¥159</div>
+                        <button class="add-to-cart">加入购物车</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="/api/placeholder/400/320" alt="毛绒熊玩偶" />
+                    </div>
+                    <div class="product-content">
+                        <h3>毛绒熊玩偶</h3>
+                        <p>柔软亲肤材质，安全无异味</p>
+                        <div class="product-price">¥89</div>
+                        <button class="add-to-cart">加入购物车</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 订阅区域 -->
+    <section class="subscribe">
+        <h2 class="section-title">订阅我们</h2>
+        <p>订阅我们的电子邮件，获取最新产品信息和优惠活动</p>
+        <form class="email-form">
+            <input type="email" class="email-input" placeholder="请输入您的邮箱地址" required>
+            <button type="submit" class="submit-btn">订阅</button>
+        </form>
+    </section>
+    
+    <!-- 页脚 -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>关于我们</h3>
+                <ul>
+                    <li><a href="#">品牌故事</a></li>
+                    <li><a href="#">企业责任</a></li>
+                    <li><a href="#">加入我们</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>客户服务</h3>
+                <ul>
+                    <li><a href="#">购物指南</a></li>
+                    <li><a href="#">支付方式</a></li>
+                    <li><a href="#">配送方式</a></li>
+                    <li><a href="#">售后服务</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>帮助中心</h3>
+                <ul>
+                    <li><a href="#">常见问题</a></li>
+                    <li><a href="#">联系客服</a></li>
+                    <li><a href="#">投诉建议</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>联系我们</h3>
+                <ul>
+                    <li>电话: 400-123-4567</li>
+                    <li>邮箱: info@tongjutoys.com</li>
+                    <li>地址: 中国上海市长宁区某某路123号</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2025 童趣玩具店. 保留所有权利.
+        </div>
+    </footer>
+</body>
+</html>
